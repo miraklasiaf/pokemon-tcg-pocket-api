@@ -1,0 +1,246 @@
+[
+  {
+    "id": "a1",
+    "name": "Genetic Apex",
+    "packs": [
+      {
+        "id": "a1-charizard",
+        "name": "Charizard ",
+        "image": "images/packs/a1-charizard.webp"
+      },
+      {
+        "id": "a1-mewtwo",
+        "name": "Mewtwo ",
+        "image": "images/packs/a1-mewtwo.webp"
+      },
+      {
+        "id": "a1-pikachu",
+        "name": "Pikachu ",
+        "image": "images/packs/a1-pikachu.webp"
+      }
+    ]
+  },
+  {
+    "id": "a1a",
+    "name": "Mythical Island",
+    "packs": [
+      {
+        "id": "a1a-mew",
+        "name": "Mew ",
+        "image": "images/packs/a1a-mew.webp"
+      }
+    ]
+  },
+  {
+    "id": "a2",
+    "name": "Space-Time Smackdown",
+    "packs": [
+      {
+        "id": "a2-dialga",
+        "name": "Dialga ",
+        "image": "images/packs/a2-dialga.webp"
+      },
+      {
+        "id": "a2-palkia",
+        "name": "Palkia ",
+        "image": "images/packs/a2-palkia.webp"
+      }
+    ]
+  },
+  {
+    "id": "a2a",
+    "name": "Triumphant Light",
+    "packs": [
+      {
+        "id": "a2a-arceus",
+        "name": "Arceus ",
+        "image": "images/packs/a2a-arceus.webp"
+      }
+    ]
+  },
+  {
+    "id": "a2b",
+    "name": "Shining Revelry",
+    "packs": [
+      {
+        "id": "a2b-booster",
+        "name": "Booster",
+        "image": "images/packs/a2b-booster.webp"
+      }
+    ]
+  },
+  {
+    "id": "a3",
+    "name": "Celestial Guardians",
+    "packs": [
+      {
+        "id": "a3-lunala",
+        "name": "Lunala ",
+        "image": "images/packs/a3-lunala.webp"
+      },
+      {
+        "id": "a3-solgaleo",
+        "name": "Solgaleo ",
+        "image": "images/packs/a3-solgaleo.webp"
+      }
+    ]
+  },
+  {
+    "id": "a3a",
+    "name": "Extradimensional Crisis",
+    "packs": [
+      {
+        "id": "a3a-booster",
+        "name": "Booster",
+        "image": "images/packs/a3a-booster.webp"
+      }
+    ]
+  },
+  {
+    "id": "a3b",
+    "name": "Eevee Grove",
+    "packs": [
+      {
+        "id": "a3b-booster",
+        "name": "Booster",
+        "image": "images/packs/a3b-booster.webp"
+      }
+    ]
+  },
+  {
+    "id": "a4",
+    "name": "Wisdom of Sea and Sky",
+    "packs": [
+      {
+        "id": "a4-hooh",
+        "name": "Ho-Oh ",
+        "image": "images/packs/a4-hooh.webp"
+      },
+      {
+        "id": "a4-lugia",
+        "name": "Lugia ",
+        "image": "images/packs/a4-lugia.webp"
+      }
+    ]
+  },
+  {
+    "id": "a4a",
+    "name": "Secluded Springs",
+    "packs": [
+      {
+        "id": "a4a-booster",
+        "name": "Booster",
+        "image": "images/packs/a4a-booster.webp"
+      }
+    ]
+  },
+  {
+    "id": "a4b",
+    "name": "Deluxe Pack: ex",
+    "packs": [
+      {
+        "id": "a4b-booster",
+        "name": "Booster",
+        "image": "images/packs/a4b-booster.webp"
+      }
+    ]
+  },
+  {
+    "id": "b1",
+    "name": "Mega Rising",
+    "packs": [
+      {
+        "id": "b1-megaaltaria",
+        "name": "Mega Altaria ",
+        "image": "images/packs/b1-megaaltaria.webp"
+      },
+      {
+        "id": "b1-megablaziken",
+        "name": "Mega Blaziken ",
+        "image": "images/packs/b1-megablaziken.webp"
+      },
+      {
+        "id": "b1-megagyarados",
+        "name": "Mega Gyarados ",
+        "image": "images/packs/b1-megagyarados.webp"
+      }
+    ]
+  },
+  {
+    "id": "b1a",
+    "name": "Crimson Blaze",
+    "packs": [
+      {
+        "id": "b1a-booster",
+        "name": "Booster",
+        "image": "images/packs/b1a-booster.webp"
+      }
+    ]
+  },
+  {
+    "id": "b2",
+    "name": "Fantastical Parade",
+    "packs": [
+      {
+        "id": "b2-booster",
+        "name": "Booster",
+        "image": "images/packs/b2-booster.webp"
+      }
+    ]
+  },
+  {
+    "id": "b2a",
+    "name": "Paldean Wonders",
+    "packs": [
+      {
+        "id": "b2a-booster",
+        "name": "Booster",
+        "image": "images/packs/b2a-booster.webp"
+      }
+    ]
+  },
+  {
+    "id": "b2b",
+    "name": "Mega Shine",
+    "packs": [
+      {
+        "id": "b2b-booster",
+        "name": "Booster",
+        "image": "images/packs/b2b-booster.webp"
+      }
+    ]
+  },
+  {
+    "id": "b3",
+    "name": "Pulsing Aura",
+    "packs": [
+      {
+        "id": "b3-booster",
+        "name": "Booster",
+        "image": "images/packs/b3-booster.webp"
+      }
+    ]
+  },
+  {
+    "id": "b3a",
+    "name": "Paradox Drive",
+    "packs": [
+      {
+        "id": "b3a-booster",
+        "name": "Booster",
+        "image": "images/packs/b3a-booster.webp"
+      }
+    ]
+  },
+  {
+    "id": "b3b",
+    "name": "Everyday Wonders",
+    "packs": [
+      {
+        "id": "b3b-booster",
+        "name": "Booster",
+        "image": "images/packs/b3b-booster.webp"
+      }
+    ]
+  }
+]

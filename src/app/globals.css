@@ -1,0 +1,660 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ---------------------------------------------------------------------
+   Design tokens
+   Subject: a personal Pokemon TCG Pocket card binder, browsed by the
+   collector who scraped it. Dark "binder shell" background, card tiles
+   read like sleeved cards on a page, foil-seam accent on hover.
+------------------------------------------------------------------------ */
+:root {
+  --bg: #12151a;
+  --surface: #1b2028;
+  --surface-hover: #212832;
+  --border: #2a313c;
+  --text: #e9ecef;
+  --text-muted: #8992a3;
+  --accent: #d9a441; /* foil gold — ex cards, focus ring */
+  --accent-teal: #46c2b9; /* full-art / interactive accent */
+
+  --ff-display: "Chakra Petch", "Inter", system-ui, sans-serif;
+  --ff-body: "Inter", system-ui, sans-serif;
+  --ff-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff-body);
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------------------------------------------------------------------
+   Header
+------------------------------------------------------------------------ */
+
+.binder-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 32px;
+  background: rgba(18, 21, 26, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.binder-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-right: auto;
+}
+
+.binder-eyebrow {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-teal);
+}
+
+.binder-title {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.01em;
+}
+
+.binder-search {
+  width: 260px;
+  max-width: 40vw;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--ff-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.binder-search::placeholder {
+  color: var(--text-muted);
+}
+
+.binder-search:focus {
+  border-color: var(--accent-teal);
+  box-shadow: 0 0 0 3px rgba(70, 194, 185, 0.18);
+}
+
+.binder-count {
+  font-family: var(--ff-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.binder-count strong {
+  color: var(--text);
+}
+
+/* ---------------------------------------------------------------------
+   Toolbar — pack / rarity / sort / page-size filters
+------------------------------------------------------------------------ */
+
+.binder-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 14px 32px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.binder-toolbar-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.binder-toolbar-field select {
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff-body);
+  font-size: 13px;
+  letter-spacing: normal;
+  text-transform: none;
+  cursor: pointer;
+  min-width: 140px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.binder-toolbar-field select:hover {
+  border-color: var(--accent-teal);
+}
+
+.binder-toolbar-field select:focus-visible {
+  outline: none;
+  border-color: var(--accent-teal);
+  box-shadow: 0 0 0 3px rgba(70, 194, 185, 0.18);
+}
+
+@media (max-width: 600px) {
+  .binder-toolbar {
+    padding: 12px 16px;
+    gap: 12px;
+  }
+
+  .binder-toolbar-field select {
+    min-width: 0;
+    flex: 1;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Grid — fixed 5 columns on desktop, narrowing responsively
+------------------------------------------------------------------------ */
+
+.binder-page {
+  padding: 28px 32px 64px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 1100px) {
+  .card-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .binder-header {
+    padding: 14px 16px;
+    flex-wrap: wrap;
+  }
+  .binder-search {
+    width: 100%;
+    max-width: none;
+    order: 3;
+  }
+  .binder-page {
+    padding: 20px 16px 48px;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Card tile
+------------------------------------------------------------------------ */
+
+.card-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  text-align: left;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.card-tile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-teal),
+    var(--accent),
+    transparent
+  );
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.card-tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-teal);
+  background: var(--surface-hover);
+}
+
+.card-tile:hover::before {
+  opacity: 1;
+  animation: foil-sweep 1.6s ease-in-out infinite;
+}
+
+@keyframes foil-sweep {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+
+.card-tile.is-ex {
+  border-color: rgba(217, 164, 65, 0.45);
+}
+
+.card-art-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 7;
+  background: #0f1216;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card-art-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-art-placeholder {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 12px;
+}
+
+.card-body {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-name {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.card-id {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.card-hp {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--accent);
+}
+
+.card-pack {
+  font-family: var(--ff-body);
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-rarity-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.card-rarity-dot.rare {
+  background: var(--accent);
+}
+
+.card-rarity-dot.fullart {
+  background: var(--accent-teal);
+}
+
+/* ---------------------------------------------------------------------
+   Pagination
+------------------------------------------------------------------------ */
+
+.binder-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 28px 32px 56px;
+}
+
+.binder-pagination button {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--ff-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease,
+    color 0.15s ease;
+}
+
+.binder-pagination button:hover:not(:disabled) {
+  border-color: var(--accent-teal);
+  background: var(--surface-hover);
+  color: var(--accent-teal);
+}
+
+.binder-pagination button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.binder-pagination-status {
+  font-family: var(--ff-mono);
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.binder-pagination-status strong {
+  color: var(--text);
+}
+
+/* ---------------------------------------------------------------------
+   Card detail modal
+------------------------------------------------------------------------ */
+
+.card-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 12, 15, 0.72);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 50;
+}
+
+.card-modal {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.card-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(18, 21, 26, 0.85);
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.card-modal-close:hover {
+  border-color: var(--accent-teal);
+  color: var(--accent-teal);
+}
+
+.card-modal-art {
+  width: 100%;
+  aspect-ratio: 5 / 7;
+  background: #0f1216;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+}
+
+.card-modal-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-modal-body {
+  padding: 18px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-modal-body h2 {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0;
+  color: var(--text);
+}
+
+.card-modal-body .card-id {
+  font-size: 12px;
+}
+
+.card-modal-body .card-pack {
+  font-size: 12.5px;
+}
+
+.card-tag {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(217, 164, 65, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(217, 164, 65, 0.35);
+}
+
+.card-tag + .card-tag {
+  margin-left: 6px;
+}
+
+/* ---------------------------------------------------------------------
+   Footer
+------------------------------------------------------------------------ */
+
+footer {
+  margin-top: auto;
+  padding: 24px 32px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  text-align: center;
+}
+
+footer p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+footer p + p {
+  margin-top: 8px;
+}
+
+footer a {
+  color: var(--accent-teal);
+  font-family: var(--ff-mono);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  footer {
+    padding: 20px 16px;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Empty state
+------------------------------------------------------------------------ */
+
+.binder-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 64px 8px;
+  max-width: 560px;
+}
+
+.binder-empty h2 {
+  font-family: var(--ff-display);
+  font-size: 20px;
+  margin: 0;
+}
+
+.binder-empty p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.binder-empty code {
+  font-family: var(--ff-mono);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.binder-no-results {
+  color: var(--text-muted);
+  font-size: 14px;
+  padding: 40px 8px;
+}
+
+/* ---------------------------------------------------------------------
+   Accessibility
+------------------------------------------------------------------------ */
+
+.card-tile:focus-visible,
+.binder-search:focus-visible {
+  outline: 2px solid var(--accent-teal);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-tile,
+  .card-tile::before {
+    transition: none;
+    animation: none !important;
+  }
+}
+
+.card-grid {
+  grid-template-columns: repeat(var(--grid-columns, 5), 1fr);
+}

@@ -1,0 +1,58 @@
+import './globals.css';
+
+import { Geist, Geist_Mono } from 'next/font/google';
+
+import type { Metadata } from 'next';
+
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin']
+});
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin']
+});
+
+export const metadata: Metadata = {
+  title: 'Pokemon TCG Pocket Card DB',
+  description: 'API for Pokemon TCG Pocket card data'
+};
+
+export default function RootLayout({
+  children
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body
+        className="flex min-h-full flex-col"
+        suppressHydrationWarning
+      >
+        <div className="flex-1">{children}</div>
+        <footer className="border-t border-gray-200 px-4 py-6 text-center text-xs text-gray-500">
+          <p>
+            Built by{' '}
+            <a
+              href="https://github.com/miraklasiaf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-gray-700 hover:underline"
+            >
+              miraklasiaf
+            </a>
+          </p>
+          <p className="mx-auto mt-2 max-w-2xl">
+            Pokémon TCG Pocket card images, names, and text are property of The Pokémon
+            Company, DeNA Co., Ltd., and Creatures Inc. This is an unofficial, fan-made
+            site with no affiliation to or endorsement from those companies.
+          </p>
+        </footer>
+      </body>
+    </html>
+  );
+}
