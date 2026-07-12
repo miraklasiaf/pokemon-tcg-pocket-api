@@ -1,57 +1,12 @@
+import { PAGE_SIZES, SETS, type Set } from '@/data';
+import { getCardNumber, getSetCode } from '@/lib/card';
 import { matchSorter, rankings } from 'match-sorter';
-
+import type { Card } from '@/types/card';
 import { NextResponse } from 'next/server';
-import { readAllCards } from '../../../lib/scraper';
+import { readAllCards } from '@/lib/scraper';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-
-const MAX_LIMIT = 200;
-const DEFAULT_LIMIT = 50;
-
-interface Card {
-  id: string;
-  name: string;
-  rarity: string;
-  pack: string;
-  health: string;
-  image: string;
-  fullart: string;
-  ex: string;
-  artist: string;
-  type: string;
-  [key: string]: unknown;
-}
-
-interface SetInfo {
-  code: string;
-  name: string;
-}
-
-// Ordered oldest -> newest within each series; code is the id prefix, name is the display label
-const SETS: SetInfo[] = [
-  { code: 'A1', name: 'Genetic Apex' },
-  { code: 'A1a', name: 'Mythical Island' },
-  { code: 'A2', name: 'Space-Time Smackdown' },
-  { code: 'A2a', name: 'Triumphant Light' },
-  { code: 'A2b', name: 'Shining Revelry' },
-  { code: 'A3', name: 'Celestial Guardians' },
-  { code: 'A3a', name: 'Extradimensional Crisis' },
-  { code: 'A3b', name: 'Eevee Grove' },
-  { code: 'A4', name: 'Wisdom of Sea and Sky' },
-  { code: 'A4a', name: 'Secluded Springs' },
-  { code: 'A4b', name: 'Deluxe Pack: ex' },
-  { code: 'PA', name: 'Promo-A' },
-  { code: 'B1', name: 'Mega Rising' },
-  { code: 'B1a', name: 'Crimson Blaze' },
-  { code: 'B2', name: 'Fantastical Parade' },
-  { code: 'B2a', name: 'Paldean Wonders' },
-  { code: 'B2b', name: 'Mega Shine' },
-  { code: 'B3', name: 'Pulsing Aura' },
-  { code: 'B3a', name: 'Paradox Drive' },
-  { code: 'B3b', name: 'Everyday Wonders' },
-  { code: 'PB', name: 'Promo-B' }
-];
 
 const SET_ORDER = new Map<string, number>(SETS.map((s, i) => [s.code.toLowerCase(), i]));
 const SET_NAME_BY_CODE = new Map<string, string>(
@@ -60,20 +15,6 @@ const SET_NAME_BY_CODE = new Map<string, string>(
 const SET_CODE_BY_NAME = new Map<string, string>(
   SETS.map((s) => [s.name.toLowerCase(), s.code.toLowerCase()])
 );
-
-// "a1-224" -> "a1"
-function getSetCode(id: string): string {
-  const dashIndex = id.indexOf('-');
-  return dashIndex === -1 ? id : id.slice(0, dashIndex);
-}
-
-// "a1-224" -> 224
-function getCardNumber(id: string): number {
-  const dashIndex = id.indexOf('-');
-  const numPart = dashIndex === -1 ? id : id.slice(dashIndex + 1);
-  const n = parseInt(numPart, 10);
-  return Number.isNaN(n) ? 0 : n;
-}
 
 function setRank(id: string): number {
   const rank = SET_ORDER.get(getSetCode(id).toLowerCase());
@@ -206,12 +147,12 @@ export async function GET(request: Request): Promise<NextResponse> {
 
   const rawLimit = parseInt(searchParams.get('limit') ?? '', 10);
   const limit = Number.isNaN(rawLimit)
-    ? DEFAULT_LIMIT
-    : Math.min(Math.max(rawLimit, 0), MAX_LIMIT);
+    ? PAGE_SIZES[0]
+    : Math.min(Math.max(rawLimit, 0), PAGE_SIZES[PAGE_SIZES.length - 1]);
 
   const page = filtered.slice(offset, offset + limit);
 
-  const response: { total: number; count: number; cards: Card[]; sets?: SetInfo[] } = {
+  const response: { total: number; count: number; cards: Card[]; sets?: Set[] } = {
     total,
     count: page.length,
     cards: page

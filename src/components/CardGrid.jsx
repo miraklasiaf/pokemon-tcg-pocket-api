@@ -1,51 +1,11 @@
 'use client';
 
+import { PAGE_SIZES, RARITIES, SETS } from '@/data';
+import { getCardNumber, getSetCode } from '@/lib/card';
 import { useEffect, useMemo, useState } from 'react';
-
-const PAGE_SIZE_OPTIONS = [25, 50, 100, 200];
-const RARITY_OPTIONS = ['◊', '◊◊', '◊◊◊', '◊◊◊◊', '☆', '☆☆', '☆☆☆', '♕', 'Promo'];
-
-// Ordered oldest -> newest within each series; code is the id prefix, name is the display label
-const SETS = [
-  { code: 'A1', name: 'Genetic Apex' },
-  { code: 'A1a', name: 'Mythical Island' },
-  { code: 'A2', name: 'Space-Time Smackdown' },
-  { code: 'A2a', name: 'Triumphant Light' },
-  { code: 'A2b', name: 'Shining Revelry' },
-  { code: 'A3', name: 'Celestial Guardians' },
-  { code: 'A3a', name: 'Extradimensional Crisis' },
-  { code: 'A3b', name: 'Eevee Grove' },
-  { code: 'A4', name: 'Wisdom of Sea and Sky' },
-  { code: 'A4a', name: 'Secluded Springs' },
-  { code: 'A4b', name: 'Deluxe Pack: ex' },
-  { code: 'PA', name: 'Promo-A' },
-  { code: 'B1', name: 'Mega Rising' },
-  { code: 'B1a', name: 'Crimson Blaze' },
-  { code: 'B2', name: 'Fantastical Parade' },
-  { code: 'B2a', name: 'Paldean Wonders' },
-  { code: 'B2b', name: 'Mega Shine' },
-  { code: 'B3', name: 'Pulsing Aura' },
-  { code: 'B3a', name: 'Paradox Drive' },
-  { code: 'B3b', name: 'Everyday Wonders' },
-  { code: 'PB', name: 'Promo-B' }
-];
 
 const SET_ORDER = new Map(SETS.map((s, i) => [s.code.toLowerCase(), i]));
 const SET_NAME_BY_CODE = new Map(SETS.map((s) => [s.code.toLowerCase(), s.name]));
-
-// "a1-224" -> "a1"
-function getSetCode(id) {
-  const dashIndex = id.indexOf('-');
-  return dashIndex === -1 ? id : id.slice(0, dashIndex);
-}
-
-// "a1-224" -> 224
-function getCardNumber(id) {
-  const dashIndex = id.indexOf('-');
-  const numPart = dashIndex === -1 ? id : id.slice(dashIndex + 1);
-  const n = parseInt(numPart, 10);
-  return Number.isNaN(n) ? 0 : n;
-}
 
 function setRank(id) {
   const rank = SET_ORDER.get(getSetCode(id).toLowerCase());
@@ -164,7 +124,7 @@ export default function CardGrid({ cards, columns = 5 }) {
             onChange={(e) => setRarity(e.target.value)}
           >
             <option value="all">All</option>
-            {RARITY_OPTIONS.map((r) => (
+            {RARITIES.map((r) => (
               <option
                 key={r}
                 value={r}
@@ -193,7 +153,7 @@ export default function CardGrid({ cards, columns = 5 }) {
             value={pageSize}
             onChange={(e) => setPageSize(Number(e.target.value))}
           >
-            {PAGE_SIZE_OPTIONS.map((size) => (
+            {PAGE_SIZES.map((size) => (
               <option
                 key={size}
                 value={size}

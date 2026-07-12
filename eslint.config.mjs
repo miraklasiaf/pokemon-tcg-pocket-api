@@ -12,7 +12,7 @@ import path from "node:path";
 import tseslint from "typescript-eslint";
 
 export default defineConfig({
-  files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
+  files: ["**/*.ts", "**/*.tsx"],
   ignores: [
     "**/utils/node-scripts/fuse-react-message.js",
     "**/components/tiptap/**",

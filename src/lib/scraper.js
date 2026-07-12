@@ -42,8 +42,11 @@ function randomUniform(min, max) {
 
 export function normalizeSetCode(code) {
   const cleaned = code.trim().toUpperCase().replace(/-/g, "");
+
   if (cleaned === "PA") return "P-A";
+
   if (cleaned === "PB") return "P-B";
+
   return code.trim();
 }
 
@@ -58,7 +61,9 @@ async function fetchPage(url) {
       return cheerio.load(response.data);
     } catch (err) {
       lastErr = err;
+
       if (attempt === 2) throw lastErr;
+
       await sleep(1000);
     }
   }
@@ -69,6 +74,7 @@ function setCodeToPrefix(setCode) {
   if (setCode.startsWith("P-")) {
     return `p${setCode.slice(2).toLowerCase()}`;
   }
+
   return setCode.toLowerCase();
 }
 
@@ -79,9 +85,11 @@ function setCodeToPrefix(setCode) {
 export async function discoverExpansion(setCode) {
   const $ = await fetchPage(`${BASE_URL}${setCode}`);
   const titleTag = $("title");
+
   if (!titleTag.length) {
     throw new Error(`Could not find page title for set ${setCode}`);
   }
+
   let name = titleTag.text().split(" (")[0].trim();
   for (const sep of [" – ", " — ", " - Limitless"]) {
     name = name.split(sep)[0].trim();
@@ -96,6 +104,7 @@ export async function discoverExpansion(setCode) {
 function extractCard($, setCode = "") {
   const titleEl = $("p.card-text-title");
   const titleLink = titleEl.find("a");
+
   if (!titleEl.length || !titleLink.length) {
     throw new Error("Card title not found");
   }
@@ -108,6 +117,7 @@ function extractCard($, setCode = "") {
 
   const titleText = titleEl.text().trim();
   let cardType;
+
   if (!titleText.includes(" - ")) {
     cardType = "Trainer";
   } else {
@@ -124,17 +134,21 @@ function extractCard($, setCode = "") {
 
   let rarity = "Unknown";
   const rarityTable = $("table.card-prints-versions");
+
   if (rarityTable.length) {
     const current = rarityTable.find("tr.current");
+
     if (current.length) {
       rarity = current.find("td").last().text().trim();
     }
   }
+
   const fullart = FULLART_RARITIES.includes(rarity) ? "Yes" : "No";
   const ex = name.split(" ").includes("ex") ? "Yes" : "No";
 
   let pack = "Every pack";
   const setInfo = $("div.card-prints-current");
+
   if (setInfo.length) {
     if (setCode === "P-A") {
       const text = setInfo.text();
@@ -146,10 +160,12 @@ function extractCard($, setCode = "") {
       }
     } else {
       const spans = setInfo.find("span");
+
       if (spans.length) {
         const lastSpanText = spans.last().text().trim();
         const segments = lastSpanText.split("·");
         const lastSegment = segments[segments.length - 1].trim();
+
         if (lastSegment.endsWith(" pack")) {
           pack = lastSegment;
         }
@@ -190,10 +206,13 @@ export async function scrapeCards(setCode, { onProgress } = {}) {
       const card = extractCard($, setCode);
       cards.push(card);
       errors = 0;
+
       if (onProgress && cards.length % 10 === 0) onProgress(cards.length);
+
       await sleep(150);
     } catch (err) {
       errors += 1;
+
       if (errors >= MAX_CONSECUTIVE_ERRORS) break;
     }
   }
@@ -222,17 +241,22 @@ export function transformCards(rawCards, setCode, expansionName) {
     const cardId = `${prefix}-${card.number.padStart(3, "0")}`;
 
     let rarity = card.rarity;
+
     if (rarity === "Crown Rare") rarity = "♕";
+
     if (isPromo) rarity = "Promo";
 
     let pack = card.pack;
+
     if (isPa) {
       if (pack === "Promo pack") {
         promoVolumeCount += 1;
+
         if (promoVolumeCount > PROMO_CARDS_PER_VOLUME) {
           promoVolume += 1;
           promoVolumeCount = 1;
         }
+
         pack = `Promo V${promoVolume}`;
       }
     } else if (isPromo) {
@@ -297,6 +321,7 @@ export async function downloadImages(cards, { onProgress } = {}) {
         .toFile(outputPath);
       card.image = localUrl;
       downloaded += 1;
+
       if (onProgress && downloaded % 10 === 0) onProgress(downloaded);
     } catch (e) {
       card.image = localUrl;
@@ -335,6 +360,7 @@ export async function downloadPackImages(expansionName, packs) {
         break;
       }
     }
+
     if (existing) {
       results.push({ packId, status: "exists" });
       continue;
@@ -351,6 +377,7 @@ export async function downloadPackImages(expansionName, packs) {
           responseType: "arraybuffer",
           validateStatus: () => true,
         });
+
         if (resp.status === 200 && resp.data.length > 500) {
           await sharp(resp.data)
             .ensureAlpha()
@@ -380,6 +407,7 @@ async function readJson(filePath, fallback) {
     return JSON.parse(raw);
   } catch (err) {
     if (err.code === "ENOENT") return fallback;
+
     throw err;
   }
 }
@@ -411,6 +439,7 @@ export async function updateExpansions(setCode, expansionName, cards) {
   const expansions = await readJson(EXPANSIONS_JSON_PATH, []);
 
   const existingExp = expansions.find((exp) => exp.id === prefix);
+
   if (existingExp) {
     return { expansion: existingExp, created: false };
   }
@@ -422,6 +451,7 @@ export async function updateExpansions(setCode, expansionName, cards) {
   ].sort();
 
   let packs;
+
   if (
     !uniquePacks.length ||
     (uniquePacks.length === 1 && uniquePacks[0] === expansionName)
@@ -474,14 +504,17 @@ export async function runAddExpansion(rawSetCode, options = {}) {
   const rawCards = await scrapeCards(setCode, {
     onProgress: (n) => log(`...scraped ${n} cards`),
   });
+
   if (!rawCards.length) {
     throw new Error("No cards found. Check the set code and try again.");
   }
+
   log(`Scraped ${rawCards.length} cards`);
 
   const cards = transformCards(rawCards, setCode, expansionName);
 
   let imageStats = null;
+
   if (!skipImages) {
     imageStats = await downloadImages(cards, {
       onProgress: (n) => log(`...downloaded ${n} images`),
@@ -495,8 +528,10 @@ export async function runAddExpansion(rawSetCode, options = {}) {
   const v4Result = await updateV4(cards);
 
   let expansionResult = null;
+
   if (!isPromo) {
     expansionResult = await updateExpansions(setCode, expansionName, cards);
+
     if (!skipImages && expansionResult.created) {
       await downloadPackImages(expansionName, expansionResult.expansion.packs);
     }

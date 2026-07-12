@@ -1,8 +1,8 @@
-import './globals.css';
+import '@/styles/globals.css';
 
 import { Geist, Geist_Mono } from 'next/font/google';
 
-import type { Metadata } from 'next';
+import generateMetadata from '@/utils/generateMetadata';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -14,16 +14,12 @@ const geistMono = Geist_Mono({
   subsets: ['latin']
 });
 
-export const metadata: Metadata = {
-  title: 'Pokemon TCG Pocket Card DB',
-  description: 'API for Pokemon TCG Pocket card data'
-};
+/* eslint-disable react-refresh/only-export-components */
+export const metadata = await generateMetadata();
 
 export default function RootLayout({
   children
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
