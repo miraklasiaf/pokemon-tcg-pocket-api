@@ -547,7 +547,6 @@ a {
 
 .card-modal-art {
   width: 100%;
-  aspect-ratio: 5 / 7;
   background: #0f1216;
   display: flex;
   align-items: center;
@@ -558,7 +557,7 @@ a {
 .card-modal-art img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  display: block;
 }
 
 .card-modal-body {
