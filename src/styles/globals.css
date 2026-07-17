@@ -259,6 +259,31 @@ a {
 /* ---------------------------------------------------------------------
    Card tile
 ------------------------------------------------------------------------ */
+.card-tile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--ff-mono);
+  white-space: nowrap;
+}
+
+.card-tile-setname {
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-tile-code {
+  font-size: 11px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
 
 .card-tile {
   position: relative;

@@ -220,12 +220,21 @@ export default function CardGrid({ cards, columns = 5 }) {
 }
 
 function CardTile({ card, onSelect }) {
+  const setCode = getSetCode(card.id);
+  const setName = SET_NAME_BY_CODE.get(setCode.toLowerCase()) || setCode;
+  const cardNo = getCardNumber(card.id);
+
   return (
     <button
       type="button"
       onClick={onSelect}
+      className="card-tile"
       title={`${card.name} — ${card.id}`}
     >
+      <div className="card-tile-header">
+        <span className="card-tile-setname">{setName}</span>
+        <span className="card-tile-code">{setCode}-{cardNo}</span>
+      </div>
       <div className="card-art-wrap">
         {card.image ? (
           <img
