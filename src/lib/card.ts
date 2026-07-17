@@ -1,3 +1,13 @@
+import { SETS } from '@/data';
+
+const SET_NAME_BY_CODE = new Map(SETS.map((s) => [s.code.toLowerCase(), s.name]));
+
+// "a1-224" -> "Genetic Apex"
+export const getSetName = (id: string): string => {
+  const code = getSetCode(id);
+  return SET_NAME_BY_CODE.get(code.toLowerCase()) ?? code;
+};
+
 // "a1-224" -> "a1"
 export const getSetCode = (id: string): string => {
   const dashIndex = id.indexOf('-');

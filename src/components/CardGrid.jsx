@@ -1,7 +1,7 @@
 'use client';
 
 import { PAGE_SIZES, RARITIES, SETS } from '@/data';
-import { getCardNumber, getSetCode } from '@/lib/card';
+import { getCardNumber, getSetCode, getSetName } from '@/lib/card';
 import { useEffect, useMemo, useState } from 'react';
 
 const SET_ORDER = new Map(SETS.map((s, i) => [s.code.toLowerCase(), i]));
@@ -221,9 +221,9 @@ export default function CardGrid({ cards, columns = 5 }) {
 
 function CardTile({ card, onSelect }) {
   const setCode = getSetCode(card.id);
-  const setName = SET_NAME_BY_CODE.get(setCode.toLowerCase()) || setCode;
+  const setName = getSetName(card.id);
   const cardNo = getCardNumber(card.id);
-
+  
   return (
     <button
       type="button"
@@ -257,29 +257,28 @@ function CardModal({ card, onClose }) {
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose]);
 
+  const setName = getSetName(card.id);
+  const setCode = getSetCode(card.id);
+  const cardNo = getCardNumber(card.id);
+
   return (
-    <div
-      className="card-modal-overlay"
-      onClick={onClose}
-    >
-      <div
-        className="card-modal"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          type="button"
-          className="card-modal-close"
-          onClick={onClose}
-          aria-label="Close"
-        >
-          ×
-        </button>
+    <div className="card-modal-overlay" onClick={onClose}>
+      <div className="card-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="card-tile-header">
+          <span className="card-tile-setname">{setName}</span>
+          <span className="card-tile-code">{setCode}-{cardNo}</span>
+          <button
+            type="button"
+            className="card-modal-close"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
         <div className="card-modal-art">
           {card.image ? (
-            <img
-              src={card.image}
-              alt={card.name}
-            />
+            <img src={card.image} alt={card.name} />
           ) : (
             <span className="card-art-placeholder">No image</span>
           )}

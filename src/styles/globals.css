@@ -262,7 +262,7 @@ a {
 .card-tile-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 6px;
   padding: 8px 10px;
   border-bottom: 1px solid var(--border);
@@ -272,6 +272,7 @@ a {
 
 .card-tile-setname {
   font-size: 10.5px;
+  line-height: 1;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -280,7 +281,8 @@ a {
 }
 
 .card-tile-code {
-  font-size: 11px;
+  font-size: 10.5px;
+  line-height: 1;
   color: var(--accent);
   flex-shrink: 0;
 }
@@ -300,8 +302,7 @@ a {
   font: inherit;
   color: inherit;
   cursor: pointer;
-  transition: transform 0.15s ease, border-color 0.15s ease,
-    background 0.15s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
 .card-tile::before {
@@ -525,17 +526,15 @@ a {
 }
 
 .card-modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 1;
-  width: 34px;
-  height: 34px;
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: rgba(18, 21, 26, 0.85);
   color: var(--text);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1;
   cursor: pointer;
   transition: border-color 0.15s ease, color 0.15s ease;
@@ -554,7 +553,6 @@ a {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 14px 14px 0 0;
 }
 
 .card-modal-art img {
