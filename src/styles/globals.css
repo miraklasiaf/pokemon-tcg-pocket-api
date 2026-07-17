@@ -192,12 +192,6 @@ a {
   }
 }
 
-@media (max-width: 380px) {
-  .binder-toolbar {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* ---------------------------------------------------------------------
    Grid — fixed columns on desktop, narrowing responsively
 ------------------------------------------------------------------------ */
