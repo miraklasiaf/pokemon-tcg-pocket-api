@@ -104,7 +104,7 @@ a {
   background: var(--surface);
   color: var(--text);
   font-family: var(--ff-body);
-  font-size: 14px;
+  font-size: 16px; /* iOS auto-zooms inputs under 16px on focus */
   outline: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
@@ -160,7 +160,7 @@ a {
   background: var(--bg);
   color: var(--text);
   font-family: var(--ff-body);
-  font-size: 13px;
+  font-size: 16px; /* iOS auto-zooms selects/inputs under 16px on focus */
   letter-spacing: normal;
   text-transform: none;
   cursor: pointer;
@@ -283,6 +283,7 @@ a {
 .card-tile-code {
   font-size: 10.5px;
   line-height: 1;
+  text-transform: none;
   color: var(--accent);
   flex-shrink: 0;
 }
@@ -302,7 +303,8 @@ a {
   font: inherit;
   color: inherit;
   cursor: pointer;
-  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease,
+    background 0.15s ease;
 }
 
 .card-tile::before {
@@ -352,6 +354,7 @@ a {
 .card-art-wrap {
   position: relative;
   width: 100%;
+  aspect-ratio: 5 / 7;
   background: #0f1216;
   display: flex;
   align-items: center;
@@ -362,6 +365,7 @@ a {
 .card-art-wrap img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   display: block;
 }
 
@@ -554,7 +558,7 @@ a {
 
 .card-modal-art img {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
 }
 
