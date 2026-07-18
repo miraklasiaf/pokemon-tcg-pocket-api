@@ -141,7 +141,7 @@ export default function CardGrid({ cards, columns = 5 }) {
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
           >
-            <option value="set">Set (default order)</option>
+            <option value="set">Set</option>
             <option value="name">Name (A–Z)</option>
             <option value="hp">HP (high–low)</option>
           </select>
