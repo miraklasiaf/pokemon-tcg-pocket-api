@@ -1,9 +1,5 @@
 import CardGrid from '@/components/CardGrid';
-import generateMetadata from '@/utils/generateMetadata';
 import { readAllCards } from '@/lib/scraper';
-
-/* eslint-disable react-refresh/only-export-components */
-export const metadata = await generateMetadata();
 
 export default async function Home() {
   const cards = await readAllCards();
