@@ -514,8 +514,8 @@ a {
 
 .card-modal {
   position: relative;
-  width: 100%;
-  max-width: 380px;
+  width: fit-content;
+  max-width: min(380px, 92vw);
   max-height: 90vh;
   overflow-y: auto;
   display: flex;
