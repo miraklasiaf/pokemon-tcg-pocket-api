@@ -1,11 +1,18 @@
 import { SETS } from '@/data';
 
 const SET_NAME_BY_CODE = new Map(SETS.map((s) => [s.code.toLowerCase(), s.name]));
+const SET_IMAGE_BY_CODE = new Map(SETS.map((s) => [s.code.toLowerCase(), s.image]));
 
 // "a1-224" -> "Genetic Apex"
 export const getSetName = (id: string): string => {
   const code = getSetCode(id);
   return SET_NAME_BY_CODE.get(code.toLowerCase()) ?? code;
+};
+
+// "a1-224" -> "images/sets/a1.webp"
+export const getSetImage = (id: string): string | undefined => {
+  const code = getSetCode(id);
+  return SET_IMAGE_BY_CODE.get(code.toLowerCase());
 };
 
 // "a1-224" -> "a1"

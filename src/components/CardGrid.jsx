@@ -1,7 +1,7 @@
 'use client';
 
 import { PAGE_SIZES, RARITIES, SETS } from '@/data';
-import { getCardNumber, getSetCode, getSetName } from '@/lib/card';
+import { getCardNumber, getSetCode, getSetImage, getSetName } from '@/lib/card';
 import { useEffect, useMemo, useState } from 'react';
 
 const SET_ORDER = new Map(SETS.map((s, i) => [s.code.toLowerCase(), i]));
@@ -221,6 +221,7 @@ export default function CardGrid({ cards, columns = 5 }) {
 
 function CardTile({ card, onSelect }) {
   const setCode = getSetCode(card.id);
+  const setImage = getSetImage(card.id);
   const setName = getSetName(card.id);
   const cardNo = getCardNumber(card.id);
   
@@ -232,7 +233,19 @@ function CardTile({ card, onSelect }) {
       title={`${card.name} — ${card.id}`}
     >
       <div className="card-tile-header">
-        <span className="card-tile-setname">{setName}</span>
+        {setImage ? (
+          <img
+            src={setImage}
+            alt={setName}
+            className="card-tile-set-icon"
+            loading="lazy"
+          />
+        ) : (
+          <span className="card-tile-setname">{setName}</span>
+        )}
+        {card.pack !== setName && !card.pack.startsWith("Shared(") && (
+          <span className="card-tile-setname">{card.pack.trim()}</span>
+        )}
         <span className="card-tile-code">{setCode}-{cardNo}</span>
       </div>
       <div className="card-art-wrap">
@@ -258,6 +271,7 @@ function CardModal({ card, onClose }) {
   }, [onClose]);
 
   const setName = getSetName(card.id);
+  const setImage = getSetImage(card.id);
   const setCode = getSetCode(card.id);
   const cardNo = getCardNumber(card.id);
 
@@ -265,7 +279,19 @@ function CardModal({ card, onClose }) {
     <div className="card-modal-overlay" onClick={onClose}>
       <div className="card-modal" onClick={(e) => e.stopPropagation()}>
         <div className="card-tile-header">
-          <span className="card-tile-setname">{setName}</span>
+          {setImage ? (
+            <img
+              src={setImage}
+              alt={setName}
+              className="card-tile-set-icon"
+              loading="lazy"
+            />
+            ) : (
+            <span className="card-tile-setname">{setName}</span>
+          )}
+          {card.pack !== setName && !card.pack.startsWith("Shared(") && (
+            <span className="card-tile-setname">{card.pack.trim()}</span>
+          )}
           <span className="card-tile-code">{setCode}-{cardNo}</span>
           <button
             type="button"
@@ -276,13 +302,11 @@ function CardModal({ card, onClose }) {
             ×
           </button>
         </div>
-        <div className="card-modal-art">
-          {card.image ? (
-            <img src={card.image} alt={card.name} />
-          ) : (
-            <span className="card-art-placeholder">No image</span>
-          )}
-        </div>
+        {card.image ? (
+          <img src={card.image} alt={card.name} className="card-modal-art" />
+        ) : (
+          <span className="card-art-placeholder">No image</span>
+        )}
       </div>
     </div>
   );

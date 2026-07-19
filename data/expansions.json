@@ -18,7 +18,8 @@
         "name": "Pikachu ",
         "image": "images/packs/a1-pikachu.webp"
       }
-    ]
+    ],
+    "image": "images/sets/a1.webp"
   },
   {
     "id": "a1a",
@@ -29,7 +30,8 @@
         "name": "Mew ",
         "image": "images/packs/a1a-mew.webp"
       }
-    ]
+    ],
+    "image": "images/sets/a1a.webp"
   },
   {
     "id": "a2",
@@ -45,7 +47,8 @@
         "name": "Palkia ",
         "image": "images/packs/a2-palkia.webp"
       }
-    ]
+    ],
+    "image": "images/sets/a2.webp"
   },
   {
     "id": "a2a",
@@ -56,7 +59,8 @@
         "name": "Arceus ",
         "image": "images/packs/a2a-arceus.webp"
       }
-    ]
+    ],
+    "image": "images/sets/a2a.webp"
   },
   {
     "id": "a2b",
@@ -67,7 +71,8 @@
         "name": "Booster",
         "image": "images/packs/a2b-booster.webp"
       }
-    ]
+    ],
+    "image": "images/sets/a2b.webp"
   },
   {
     "id": "a3",
@@ -83,7 +88,8 @@
         "name": "Solgaleo ",
         "image": "images/packs/a3-solgaleo.webp"
       }
-    ]
+    ],
+    "image": "images/sets/a3.webp"
   },
   {
     "id": "a3a",
@@ -94,7 +100,8 @@
         "name": "Booster",
         "image": "images/packs/a3a-booster.webp"
       }
-    ]
+    ],
+    "image": "images/sets/a3a.webp"
   },
   {
     "id": "a3b",
@@ -105,7 +112,8 @@
         "name": "Booster",
         "image": "images/packs/a3b-booster.webp"
       }
-    ]
+    ],
+    "image": "images/sets/a3b.webp"
   },
   {
     "id": "a4",
@@ -121,7 +129,8 @@
         "name": "Lugia ",
         "image": "images/packs/a4-lugia.webp"
       }
-    ]
+    ],
+    "image": "images/sets/a4.webp"
   },
   {
     "id": "a4a",
@@ -132,7 +141,8 @@
         "name": "Booster",
         "image": "images/packs/a4a-booster.webp"
       }
-    ]
+    ],
+    "image": "images/sets/a4a.webp"
   },
   {
     "id": "a4b",
@@ -143,7 +153,8 @@
         "name": "Booster",
         "image": "images/packs/a4b-booster.webp"
       }
-    ]
+    ],
+    "image": "images/sets/a4b.webp"
   },
   {
     "id": "b1",
@@ -164,7 +175,8 @@
         "name": "Mega Gyarados ",
         "image": "images/packs/b1-megagyarados.webp"
       }
-    ]
+    ],
+    "image": "images/sets/b1.webp"
   },
   {
     "id": "b1a",
@@ -175,7 +187,8 @@
         "name": "Booster",
         "image": "images/packs/b1a-booster.webp"
       }
-    ]
+    ],
+    "image": "images/sets/b1a.webp"
   },
   {
     "id": "b2",
@@ -186,7 +199,8 @@
         "name": "Booster",
         "image": "images/packs/b2-booster.webp"
       }
-    ]
+    ],
+    "image": "images/sets/b2.webp"
   },
   {
     "id": "b2a",
@@ -197,7 +211,8 @@
         "name": "Booster",
         "image": "images/packs/b2a-booster.webp"
       }
-    ]
+    ],
+    "image": "images/sets/b2a.webp"
   },
   {
     "id": "b2b",
@@ -208,7 +223,8 @@
         "name": "Booster",
         "image": "images/packs/b2b-booster.webp"
       }
-    ]
+    ],
+    "image": "images/sets/b2b.webp"
   },
   {
     "id": "b3",
@@ -219,7 +235,8 @@
         "name": "Booster",
         "image": "images/packs/b3-booster.webp"
       }
-    ]
+    ],
+    "image": "images/sets/b3.webp"
   },
   {
     "id": "b3a",
@@ -230,7 +247,8 @@
         "name": "Booster",
         "image": "images/packs/b3a-booster.webp"
       }
-    ]
+    ],
+    "image": "images/sets/b3a.webp"
   },
   {
     "id": "b3b",
@@ -241,6 +259,7 @@
         "name": "Booster",
         "image": "images/packs/b3b-booster.webp"
       }
-    ]
+    ],
+    "image": "images/sets/b3b.webp"
   }
 ]

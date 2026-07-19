@@ -9,7 +9,8 @@
     "lint": "eslint ./src --config ./eslint.config.mjs",
     "lint:fix": "eslint --fix ./src --config ./eslint.config.mjs",
     "scrape": "node src/scripts/add-expansion.js",
-    "scrape-all": "node src/scripts/add-all.js"
+    "scrape-all": "node src/scripts/add-all.js",
+    "scrape-set-images": "node src/scripts/add-set-images.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

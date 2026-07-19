@@ -264,6 +264,11 @@ a {
   white-space: nowrap;
 }
 
+.card-tile-set-icon {
+  height: 16px;
+  width: auto;
+}
+
 .card-tile-setname {
   font-size: 10.5px;
   line-height: 1;
@@ -542,18 +547,14 @@ a {
 }
 
 .card-modal-art {
-  width: 100%;
-  background: #0f1216;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.card-modal-art img {
-  width: 100%;
-  height: auto;
   display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain;
+  margin: 0 auto;
+  background: #0f1216;
 }
 
 .card-modal-body {

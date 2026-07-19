@@ -18,6 +18,7 @@ export const V4_JSON_PATH = path.join(DATA_DIR, "v4.json");
 export const EXPANSIONS_JSON_PATH = path.join(DATA_DIR, "expansions.json");
 const CARDS_DIR = path.join(IMAGES_DIR, "cards");
 const PACKS_DIR = path.join(IMAGES_DIR, "packs");
+const SETS_DIR = path.join(IMAGES_DIR, "sets");
 
 const FULLART_RARITIES = ["☆", "☆☆", "☆☆☆", "Crown Rare"];
 const MAX_CONSECUTIVE_ERRORS = 5;
@@ -95,6 +96,23 @@ export async function discoverExpansion(setCode) {
     name = name.split(sep)[0].trim();
   }
   return name;
+}
+
+// ---------------------------------------------------------------------------
+// Step 1b: Discover the set's icon/logo image from the sets index page
+// ---------------------------------------------------------------------------
+
+export async function discoverSetImageUrl(setCode) {
+  const $ = await fetchPage(BASE_URL);
+  const link = $(`a[href="/cards/${setCode}"]`).first();
+
+  if (!link.length) return null;
+
+  const img = link.find("img.set");
+
+  if (!img.length) return null;
+
+  return img.attr("src") || null;
 }
 
 // ---------------------------------------------------------------------------
@@ -398,6 +416,39 @@ export async function downloadPackImages(expansionName, packs) {
 }
 
 // ---------------------------------------------------------------------------
+// Step 5b: Download the set's own icon/logo image
+// ---------------------------------------------------------------------------
+
+export async function downloadSetImage(setCode, sourceUrl) {
+  const prefix = setCodeToPrefix(setCode);
+  await fsp.mkdir(SETS_DIR, { recursive: true });
+  const outputPath = path.join(SETS_DIR, `${prefix}.webp`);
+  const localUrl = `images/sets/${prefix}.webp`;
+
+  if (fs.existsSync(outputPath)) {
+    return { status: "exists", image: localUrl };
+  }
+
+  if (!sourceUrl) {
+    return { status: "no-source", image: localUrl };
+  }
+
+  try {
+    const response = await axios.get(sourceUrl, {
+      timeout: 30000,
+      responseType: "arraybuffer",
+    });
+    await sharp(response.data)
+      .ensureAlpha()
+      .webp({ quality: 90 })
+      .toFile(outputPath);
+    return { status: "downloaded", image: localUrl };
+  } catch (e) {
+    return { status: "failed", image: localUrl };
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Step 6: Update data files
 // ---------------------------------------------------------------------------
 
@@ -433,7 +484,12 @@ export async function updateV4(newCards) {
   return { added: toAdd.length, total: existing.length };
 }
 
-export async function updateExpansions(setCode, expansionName, cards) {
+export async function updateExpansions(
+  setCode,
+  expansionName,
+  cards,
+  setImage = null,
+) {
   await fsp.mkdir(DATA_DIR, { recursive: true });
   const prefix = setCodeToPrefix(setCode);
   const expansions = await readJson(EXPANSIONS_JSON_PATH, []);
@@ -474,7 +530,12 @@ export async function updateExpansions(setCode, expansionName, cards) {
     });
   }
 
-  const newExpansion = { id: prefix, name: expansionName, packs };
+  const newExpansion = {
+    id: prefix,
+    name: expansionName,
+    image: setImage || `images/sets/${prefix}.webp`,
+    packs,
+  };
   expansions.push(newExpansion);
   await fsp.writeFile(
     EXPANSIONS_JSON_PATH,
@@ -514,15 +575,32 @@ export async function runAddExpansion(rawSetCode, options = {}) {
   const cards = transformCards(rawCards, setCode, expansionName);
 
   let imageStats = null;
+  let setImageResult = null;
 
   if (!skipImages) {
     imageStats = await downloadImages(cards, {
       onProgress: (n) => log(`...downloaded ${n} images`),
     });
+
+    log(`Looking up set icon for ${setCode}...`);
+    const setImageUrl = await discoverSetImageUrl(setCode);
+
+    if (setImageUrl) {
+      setImageResult = await downloadSetImage(setCode, setImageUrl);
+      log(`Set icon: ${setImageResult.status} -> ${setImageResult.image}`);
+    } else {
+      log(`Set icon not found on sets index page for ${setCode}`);
+      setImageResult = {
+        status: "not-found",
+        image: `images/sets/${prefix}.webp`,
+      };
+    }
   } else {
     for (const card of cards) {
       card.image = `images/cards/${card.id}.webp`;
     }
+
+    setImageResult = { status: "skipped", image: `images/sets/${prefix}.webp` };
   }
 
   const v4Result = await updateV4(cards);
@@ -530,7 +608,12 @@ export async function runAddExpansion(rawSetCode, options = {}) {
   let expansionResult = null;
 
   if (!isPromo) {
-    expansionResult = await updateExpansions(setCode, expansionName, cards);
+    expansionResult = await updateExpansions(
+      setCode,
+      expansionName,
+      cards,
+      setImageResult ? setImageResult.image : null,
+    );
 
     if (!skipImages && expansionResult.created) {
       await downloadPackImages(expansionName, expansionResult.expansion.packs);
@@ -546,6 +629,7 @@ export async function runAddExpansion(rawSetCode, options = {}) {
     cardsAdded: v4Result.added,
     totalCardsInDb: v4Result.total,
     imageStats,
+    setImage: setImageResult,
     expansion: expansionResult ? expansionResult.expansion : null,
     expansionCreated: expansionResult ? expansionResult.created : false,
   };
