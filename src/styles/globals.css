@@ -534,11 +534,124 @@ a {
   color: var(--accent-teal);
 }
 
+.trade-tray-export {
+  position: fixed;
+  right: 32px;
+  bottom: 64px;
+  width: min(420px, calc(100vw - 64px));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.trade-tray-export textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+/* Copy (Blue) */
+.trade-tray button.btn-copy {
+  --surface: #2563eb;
+  --border: #1d4ed8;
+  --text: #ffffff;
+}
+
+.trade-tray button.btn-copy:hover {
+  --surface-hover: #1d4ed8;
+  --accent-teal: #1d4ed8;
+  color: #ffffff;
+}
+
+/* Close (Gray) */
+.trade-tray button.btn-close {
+  --surface: #505050;
+  --border: #3d3d3d;
+  --text: #ffffff;
+}
+
+.trade-tray button.btn-close:hover {
+  --surface-hover: #3d3d3d;
+  --accent-teal: #2a2a2a;
+  color: #ffffff;
+}
+
+/* Export (Yellow) */
+.trade-tray button.btn-export {
+  --surface: #eab308;
+  --border: #ca8a04;
+  --text: #000000;
+  font-weight: 600;
+}
+
+.trade-tray button.btn-export:hover {
+  --surface-hover: #ca8a04;
+  --accent-teal: #a16207;
+  color: #000000;
+}
+
+/* Reset (Red) */
+.trade-tray button.btn-reset {
+  --surface: #dc2626;
+  --border: #b91c1c;
+  --text: #ffffff;
+}
+
+.trade-tray button.btn-reset:hover {
+  --surface-hover: #b91c1c;
+  --accent-teal: #991b1b;
+  color: #ffffff;
+}
+
+/* Custom Scrollbar Styling (WebKit / Chrome / Safari / Edge) */
+.trade-tray-export textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.trade-tray-export textarea::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.trade-tray-export textarea::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.trade-tray-export textarea::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Custom Scrollbar Styling (Firefox) */
+.trade-tray-export textarea {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) rgba(0, 0, 0, 0.2);
+}
+
 @media (max-width: 600px) {
   .trade-tray {
     padding: 12px 16px;
     gap: 12px;
     flex-wrap: wrap;
+  }
+  .trade-tray-export {
+    right: 16px;
+    left: 16px;
+    bottom: 88px;
+    width: auto;
   }
 }
 

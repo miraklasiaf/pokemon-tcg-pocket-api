@@ -211,14 +211,13 @@ export default function CardGrid({ cards, columns = 5 }) {
           </button>
         </nav>
       )}
-
       {activeCard && (
         <CardModal
           card={activeCard}
           onClose={() => setActiveCard(null)}
         />
       )}
-        <TradeTray />
+      <TradeTray />
     </>
   );
 }
