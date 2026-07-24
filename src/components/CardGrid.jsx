@@ -227,6 +227,7 @@ function CardTile({ card, onSelect }) {
   const { lists, toggle } = useTradeList();
   const isFt = Boolean(lists.ft[card.id]);
   const isLf = Boolean(lists.lf[card.id]);
+  const isPromo = card.rarity === 'Promo';
 
   const setCode = getSetCode(card.id);
   const setImage = getSetImage(card.id);
@@ -261,22 +262,24 @@ function CardTile({ card, onSelect }) {
         </div>
       </button>
 
-      <div className="card-tile-actions">
-        <button
-          type="button"
-          className={isLf ? 'trade-btn active-lf' : 'trade-btn'}
-          onClick={(e) => { e.stopPropagation(); toggle(card, 'lf'); }}
-        >
-          LF
-        </button>
-        <button
-          type="button"
-          className={isFt ? 'trade-btn active-ft' : 'trade-btn'}
-          onClick={(e) => { e.stopPropagation(); toggle(card, 'ft'); }}
-        >
-          FT
-        </button>
-      </div>
+            {!isPromo && (
+        <div className="card-tile-actions">
+          <button
+            type="button"
+            className={isLf ? 'trade-btn active-lf' : 'trade-btn'}
+            onClick={(e) => { e.stopPropagation(); toggle(card, 'lf'); }}
+          >
+            LF
+          </button>
+          <button
+            type="button"
+            className={isFt ? 'trade-btn active-ft' : 'trade-btn'}
+            onClick={(e) => { e.stopPropagation(); toggle(card, 'ft'); }}
+          >
+            FT
+          </button>
+        </div>
+      )}
     </div>
   );
 }
