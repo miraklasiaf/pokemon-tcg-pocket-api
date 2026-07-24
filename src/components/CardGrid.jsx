@@ -4,6 +4,9 @@ import { PAGE_SIZES, RARITIES, SETS } from '@/data';
 import { getCardNumber, getSetCode, getSetImage, getSetName } from '@/lib/card';
 import { useEffect, useMemo, useState } from 'react';
 
+import TradeTray from './TradeTray';
+import { useTradeList } from '@/context/TradeListContext';
+
 const SET_ORDER = new Map(SETS.map((s, i) => [s.code.toLowerCase(), i]));
 const SET_NAME_BY_CODE = new Map(SETS.map((s) => [s.code.toLowerCase(), s.name]));
 
@@ -215,51 +218,66 @@ export default function CardGrid({ cards, columns = 5 }) {
           onClose={() => setActiveCard(null)}
         />
       )}
+        <TradeTray />
     </>
   );
 }
 
 function CardTile({ card, onSelect }) {
+  const { lists, toggle } = useTradeList();
+  const isFt = Boolean(lists.ft[card.id]);
+  const isLf = Boolean(lists.lf[card.id]);
+
   const setCode = getSetCode(card.id);
   const setImage = getSetImage(card.id);
   const setName = getSetName(card.id);
   const cardNo = getCardNumber(card.id);
-  
+
   return (
-    <button
-      type="button"
-      onClick={onSelect}
-      className="card-tile"
-      title={`${card.name} — ${card.id}`}
-    >
-      <div className="card-tile-header">
-        {setImage ? (
-          <img
-            src={setImage}
-            alt={setName}
-            className="card-tile-set-icon"
-            loading="lazy"
-          />
-        ) : (
-          <span className="card-tile-setname">{setName}</span>
-        )}
-        {card.pack !== setName && !card.pack.startsWith("Shared(") && (
-          <span className="card-tile-setname">{card.pack.trim()}</span>
-        )}
-        <span className="card-tile-code">{setCode}-{cardNo}</span>
+    <div className="card-tile-wrap">
+      <button
+        type="button"
+        onClick={onSelect}
+        className="card-tile"
+        title={`${card.name} — ${card.id}`}
+      >
+        <div className="card-tile-header">
+          {setImage ? (
+            <img src={setImage} alt={setName} className="card-tile-set-icon" loading="lazy" />
+          ) : (
+            <span className="card-tile-setname">{setName}</span>
+          )}
+          {card.pack !== setName && !card.pack.startsWith('Shared(') && (
+            <span className="card-tile-setname">{card.pack.trim()}</span>
+          )}
+          <span className="card-tile-code">{setCode}-{cardNo}</span>
+        </div>
+        <div className="card-art-wrap">
+          {card.image ? (
+            <img src={card.image} alt={card.name} loading="lazy" />
+          ) : (
+            <span className="card-art-placeholder">No image</span>
+          )}
+        </div>
+      </button>
+
+      <div className="card-tile-actions">
+        <button
+          type="button"
+          className={isLf ? 'trade-btn active-lf' : 'trade-btn'}
+          onClick={(e) => { e.stopPropagation(); toggle(card, 'lf'); }}
+        >
+          LF
+        </button>
+        <button
+          type="button"
+          className={isFt ? 'trade-btn active-ft' : 'trade-btn'}
+          onClick={(e) => { e.stopPropagation(); toggle(card, 'ft'); }}
+        >
+          FT
+        </button>
       </div>
-      <div className="card-art-wrap">
-        {card.image ? (
-          <img
-            src={card.image}
-            alt={card.name}
-            loading="lazy"
-          />
-        ) : (
-          <span className="card-art-placeholder">No image</span>
-        )}
-      </div>
-    </button>
+    </div>
   );
 }
 

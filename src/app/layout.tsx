@@ -2,6 +2,7 @@ import '@/styles/globals.css';
 
 import { Geist, Geist_Mono } from 'next/font/google';
 
+import { TradeListProvider } from '@/context/TradeListContext';
 import generateMetadata from '@/utils/generateMetadata';
 
 const geistSans = Geist({
@@ -29,7 +30,9 @@ export default function RootLayout({
         className="flex min-h-full flex-col"
         suppressHydrationWarning
       >
-        <div className="flex-1">{children}</div>
+        <TradeListProvider>
+          <div className="flex-1">{children}</div>
+        </TradeListProvider>
         <footer className="border-t border-gray-200 px-4 py-6 text-center text-xs text-gray-500">
           <p>
             Built by{' '}

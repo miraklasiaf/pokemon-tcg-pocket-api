@@ -9,49 +9,49 @@ importers:
   .:
     dependencies:
       '@emotion/react':
-        specifier: ^11.14.0
+        specifier: 11.14.0
         version: 11.14.0(@types/react@19.2.13)(react@19.2.7)
       '@emotion/styled':
-        specifier: ^11.14.1
+        specifier: 11.14.1
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.13)(react@19.2.7))(@types/react@19.2.13)(react@19.2.7)
       '@hookform/resolvers':
-        specifier: ^5.4.0
+        specifier: 5.4.0
         version: 5.4.0(react-hook-form@7.80.0(react@19.2.7))
       '@mui/icons-material':
-        specifier: ^9.1.1
+        specifier: 9.1.1
         version: 9.1.1(@mui/material@9.1.2(@emotion/react@11.14.0(@types/react@19.2.13)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.13)(react@19.2.7))(@types/react@19.2.13)(react@19.2.7))(@types/react@19.2.13)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.13)(react@19.2.7)
       '@mui/material':
-        specifier: ^9.1.2
+        specifier: 9.1.2
         version: 9.1.2(@emotion/react@11.14.0(@types/react@19.2.13)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.13)(react@19.2.7))(@types/react@19.2.13)(react@19.2.7))(@types/react@19.2.13)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@mui/x-date-pickers':
-        specifier: ^9.6.0
+        specifier: 9.6.0
         version: 9.6.0(@emotion/react@11.14.0(@types/react@19.2.13)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.13)(react@19.2.7))(@types/react@19.2.13)(react@19.2.7))(@mui/material@9.1.2(@emotion/react@11.14.0(@types/react@19.2.13)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.13)(react@19.2.7))(@types/react@19.2.13)(react@19.2.7))(@types/react@19.2.13)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@mui/system@9.1.2(@emotion/react@11.14.0(@types/react@19.2.13)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.13)(react@19.2.7))(@types/react@19.2.13)(react@19.2.7))(@types/react@19.2.13)(react@19.2.7))(@types/react@19.2.13)(date-fns@4.4.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@next/mdx':
-        specifier: ^16.2.9
+        specifier: 16.2.9
         version: 16.2.9
       date-fns:
-        specifier: ^4.4.0
+        specifier: 4.4.0
         version: 4.4.0
       match-sorter:
-        specifier: ^8.3.0
+        specifier: 8.3.0
         version: 8.3.0
       next:
-        specifier: ^16.2.9
+        specifier: 16.2.9
         version: 16.2.9(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.101.0)
       react:
-        specifier: ^19.2.7
+        specifier: 19.2.7
         version: 19.2.7
       react-dom:
-        specifier: ^19.2.7
+        specifier: 19.2.7
         version: 19.2.7(react@19.2.7)
       react-hook-form:
-        specifier: ^7.80.0
+        specifier: 7.80.0
         version: 7.80.0(react@19.2.7)
       sugar-high:
-        specifier: ^1.2.1
+        specifier: 1.2.1
         version: 1.2.1
       zod:
-        specifier: ^4.4.3
+        specifier: 4.4.3
         version: 4.4.3
     devDependencies:
       '@eslint/eslintrc':
@@ -130,7 +130,7 @@ importers:
         specifier: 5.5.5
         version: 5.5.5(eslint-config-prettier@10.1.8(eslint@9.39.2(jiti@2.7.0)))(eslint@9.39.2(jiti@2.7.0))(prettier@3.8.1)
       eslint-plugin-react:
-        specifier: ^7.37.5
+        specifier: 7.37.5
         version: 7.37.5(eslint@9.39.2(jiti@2.7.0))
       eslint-plugin-react-hooks:
         specifier: 7.0.1
@@ -148,8 +148,8 @@ importers:
         specifier: 3.8.1
         version: 3.8.1
       prettier-plugin-tailwindcss:
-        specifier: ^0.7.2
-        version: 0.7.4(prettier@3.8.1)
+        specifier: 0.7.2
+        version: 0.7.2(prettier@3.8.1)
       promise:
         specifier: 8.3.0
         version: 8.3.0
@@ -2654,8 +2654,8 @@ packages:
     resolution: {integrity: sha512-SxToR7P8Y2lWmv/kTzVLC1t/GDI2WGjMwNhLLE9qtH8Q13C+aEmuRlzDst4Up4s0Wc8sF2M+J57iB3cMLqftfg==}
     engines: {node: '>=6.0.0'}
 
-  prettier-plugin-tailwindcss@0.7.4:
-    resolution: {integrity: sha512-UKii4RjY05SNt/WQi6/NcOn/LsT0/ILLXsxygjbRg5/YZelsSu5jTqorYHPDGq4nZy5q5hpCu+XdGZ1xaJEQgw==}
+  prettier-plugin-tailwindcss@0.7.2:
+    resolution: {integrity: sha512-LkphyK3Fw+q2HdMOoiEHWf93fNtYJwfamoKPl7UwtjFQdei/iIBoX11G6j706FzN3ymX9mPVi97qIY8328vdnA==}
     engines: {node: '>=20.19'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'
@@ -5727,7 +5727,7 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier-plugin-tailwindcss@0.7.4(prettier@3.8.1):
+  prettier-plugin-tailwindcss@0.7.2(prettier@3.8.1):
     dependencies:
       prettier: 3.8.1
 

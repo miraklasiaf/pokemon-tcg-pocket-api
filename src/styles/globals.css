@@ -31,8 +31,8 @@ body {
   --border: #2a313c;
   --text: #e9ecef;
   --text-muted: #8992a3;
-  --accent: #d9a441; /* foil gold — ex cards, focus ring */
-  --accent-teal: #46c2b9; /* full-art / interactive accent */
+  --accent: #d9a441; /* foil gold — ex cards, focus ring, LF */
+  --accent-teal: #46c2b9; /* full-art / interactive accent, FT */
 
   --ff-display: "Chakra Petch", "Inter", system-ui, sans-serif;
   --ff-body: "Inter", system-ui, sans-serif;
@@ -294,7 +294,7 @@ a {
   width: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
   overflow: hidden;
   text-decoration: none;
   text-align: left;
@@ -436,6 +436,110 @@ a {
 
 .card-rarity-dot.fullart {
   background: var(--accent-teal);
+}
+
+/* ---------------------------------------------------------------------
+   Trade list — FT/LF card actions + floating tray
+------------------------------------------------------------------------ */
+
+.card-tile-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card-tile-actions {
+  display: flex;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+}
+
+.trade-btn {
+  flex: 1;
+  padding: 6px 0;
+  border: none;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.trade-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.trade-btn.active-ft {
+  background: rgba(70, 194, 185, 0.16);
+  color: var(--accent-teal);
+}
+
+.trade-btn.active-lf {
+  background: rgba(217, 164, 65, 0.16);
+  color: var(--accent);
+}
+
+.trade-tray {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 14px 32px;
+  background: rgba(18, 21, 26, 0.92);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--border);
+  font-family: var(--ff-mono);
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.trade-tray strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.trade-tray-spacer {
+  flex: 1;
+}
+
+.trade-tray button {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--ff-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease,
+    color 0.15s ease;
+}
+
+.trade-tray button:hover {
+  border-color: var(--accent-teal);
+  background: var(--surface-hover);
+  color: var(--accent-teal);
+}
+
+@media (max-width: 600px) {
+  .trade-tray {
+    padding: 12px 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
 }
 
 /* ---------------------------------------------------------------------
@@ -698,7 +802,8 @@ footer a:hover {
 ------------------------------------------------------------------------ */
 
 .card-tile:focus-visible,
-.binder-search:focus-visible {
+.binder-search:focus-visible,
+.trade-btn:focus-visible {
   outline: 2px solid var(--accent-teal);
   outline-offset: 2px;
 }
