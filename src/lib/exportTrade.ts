@@ -17,9 +17,9 @@ export interface TradeLists {
 export function exportTradeLists(lists: TradeLists): string {
   const sections: string[] = [];
 
-  if (Object.keys(lists.lf).length) sections.push(`LF:\n\n${formatGroup(lists.lf)}`);
+  if (Object.keys(lists.lf).length) sections.push(`LF:\n${formatGroup(lists.lf)}`);
 
-  if (Object.keys(lists.ft).length) sections.push(`FT:\n\n${formatGroup(lists.ft)}`);
+  if (Object.keys(lists.ft).length) sections.push(`FT:\n${formatGroup(lists.ft)}`);
 
   return sections.join('\n\n');
 }
@@ -37,7 +37,7 @@ function formatGroup(map: TradeMap): string {
     .map((s: Set) => {
       const names = bySet[s.code.toLowerCase()]
         .sort((a, b) => a.localeCompare(b))
-        .map((n) => n.toLowerCase());
+        .map((n) => n);
       return `- [${s.abbreviation}] ${names.join(', ')}`;
     })
     .join('\n');
