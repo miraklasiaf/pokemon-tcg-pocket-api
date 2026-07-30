@@ -15,7 +15,7 @@ function setRank(id) {
   return rank === undefined ? SETS.length : rank; // unknown sets sort last
 }
 
-export default function CardGrid({ cards, columns = 5 }) {
+export default function CardGrid({ cards, columns = 6 }) {
   const [query, setQuery] = useState('');
   const [set, setSet] = useState('all');
   const [rarity, setRarity] = useState('all');

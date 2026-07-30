@@ -261,5 +261,17 @@
       }
     ],
     "image": "images/sets/b3b.webp"
+  },
+  {
+    "id": "b4",
+    "name": "Ruler of the Skies",
+    "image": "images/sets/b4.webp",
+    "packs": [
+      {
+        "id": "b4-booster",
+        "name": "Booster",
+        "image": "images/packs/b4-booster.webp"
+      }
+    ]
   }
 ]

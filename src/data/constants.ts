@@ -75,12 +75,6 @@ export const SETS = [
     image: 'images/sets/a4b.webp'
   },
   {
-    code: 'PA',
-    name: 'Promo-A',
-    abbreviation: 'P-A',
-    image: 'images/sets/pa.webp'
-  },
-  {
     code: 'B1',
     name: 'Mega Rising',
     abbreviation: 'MR',
@@ -127,6 +121,18 @@ export const SETS = [
     name: 'Everyday Wonders',
     abbreviation: 'EW',
     image: 'images/sets/b3b.webp'
+  },
+  {
+    code: 'B4',
+    name: 'Ruler of the Skies',
+    abbreviation: 'RTS',
+    image: 'images/sets/b4.webp'
+  },
+  {
+    code: 'PA',
+    name: 'Promo-A',
+    abbreviation: 'P-A',
+    image: 'images/sets/pa.webp'
   },
   {
     code: 'PB',
