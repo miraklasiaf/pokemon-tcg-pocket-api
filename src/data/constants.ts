@@ -129,6 +129,12 @@ export const SETS = [
     image: 'images/sets/b4.webp'
   },
   {
+    code: 'B4a',
+    name: "Team Rocket's Ambition",
+    abbreviation: 'TRA',
+    image: 'images/sets/b4a.webp'
+  },
+  {
     code: 'PA',
     name: 'Promo-A',
     abbreviation: 'P-A',

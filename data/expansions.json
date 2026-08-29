@@ -273,5 +273,17 @@
         "image": "images/packs/b4-booster.webp"
       }
     ]
+  },
+  {
+    "id": "b4a",
+    "name": "Team Rocket's Ambition",
+    "image": "images/sets/b4a.webp",
+    "packs": [
+      {
+        "id": "b4a-booster",
+        "name": "Booster",
+        "image": "images/packs/b4a-booster.webp"
+      }
+    ]
   }
 ]
