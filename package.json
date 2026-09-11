@@ -63,7 +63,7 @@
     "prettier": "3.8.1",
     "prettier-plugin-tailwindcss": "0.7.2",
     "promise": "8.3.0",
-    "sharp": "0.35.3",
+    "sharp": "0.35.4",
     "tailwindcss": "4.1.18",
     "typescript": "5.9.3",
     "typescript-eslint": "8.54.0",
