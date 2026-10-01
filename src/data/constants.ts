@@ -135,6 +135,12 @@ export const SETS = [
     image: 'images/sets/b4a.webp'
   },
   {
+    code: 'B4b',
+    name: 'Deluxe Pack: Mega',
+    abbreviation: 'DPMega',
+    image: 'images/sets/b4b.webp'
+  },
+  {
     code: 'PA',
     name: 'Promo-A',
     abbreviation: 'P-A',

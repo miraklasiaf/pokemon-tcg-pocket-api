@@ -285,5 +285,17 @@
         "image": "images/packs/b4a-booster.webp"
       }
     ]
+  },
+  {
+    "id": "b4b",
+    "name": "Deluxe Pack: Mega",
+    "image": "images/sets/b4b.webp",
+    "packs": [
+      {
+        "id": "b4b-booster",
+        "name": "Booster",
+        "image": "images/packs/b4b-booster.webp"
+      }
+    ]
   }
 ]
