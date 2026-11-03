@@ -27,7 +27,7 @@
     "react-dom": "19.2.7",
     "react-hook-form": "7.80.0",
     "sugar-high": "1.2.1",
-    "zod": "4.4.3"
+    "zod": "4.6.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.3",
