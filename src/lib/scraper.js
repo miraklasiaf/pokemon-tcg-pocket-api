@@ -45,8 +45,8 @@ export function normalizeSetCode(code) {
   const cleaned = code.trim().toUpperCase().replace(/-/g, "");
 
   if (cleaned === "PA") return "P-A";
-
   if (cleaned === "PB") return "P-B";
+  if (cleaned === "PC") return "P-C";
 
   return code.trim();
 }

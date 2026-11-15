@@ -297,5 +297,34 @@
         "image": "images/packs/b4b-booster.webp"
       }
     ]
+  },
+  {
+    "id": "p-c",
+    "name": "Promo-C",
+    "image": "images/sets/p-c.webp",
+    "packs": [
+      {
+        "id": "p-c-promo",
+        "name": "Promo",
+        "image": "images/packs/p-c-promo.webp"
+      }
+    ]
+  },
+  {
+    "id": "c1",
+    "name": "Dual Fusion",
+    "image": "images/sets/c1.webp",
+    "packs": [
+      {
+        "id": "c1-megamewtwox",
+        "name": "Mega Mewtwo X ",
+        "image": "images/packs/c1-megamewtwox.webp"
+      },
+      {
+        "id": "c1-pikachu",
+        "name": "Pikachu ",
+        "image": "images/packs/c1-pikachu.webp"
+      }
+    ]
   }
 ]

@@ -25,6 +25,8 @@ const sets = [
   "B4a",
   "B4b",
   "PB",
+  "C1",
+  "PC",
 ];
 
 for (const set of sets) {

@@ -141,6 +141,12 @@ export const SETS = [
     image: 'images/sets/b4b.webp'
   },
   {
+    code: 'C1',
+    name: 'Dual Fusion',
+    abbreviation: 'DF',
+    image: 'images/sets/c1.webp'
+  },
+  {
     code: 'PA',
     name: 'Promo-A',
     abbreviation: 'P-A',
@@ -151,6 +157,12 @@ export const SETS = [
     name: 'Promo-B',
     abbreviation: 'P-B',
     image: 'images/sets/pb.webp'
+  },
+  {
+    code: 'PC',
+    name: 'Promo-C',
+    abbreviation: 'P-C',
+    image: 'images/sets/pc.webp'
   }
 ] as const;
 
