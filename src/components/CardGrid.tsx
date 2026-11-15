@@ -18,7 +18,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import MuiCard from '@mui/material/Card';
 import Pagination from '@mui/material/Pagination';
-import type { Card as PocketCard } from '@/types/card'; // adjust to your real path
+import type { Card as PocketCard } from '@/types/card';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import TradeTray from './TradeTray';
