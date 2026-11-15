@@ -44,6 +44,6 @@
     "build/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "mdx-components.tsx",
-    "src/components/CardGrid.jsx"
+    "src/components/CardGrid.tsx"
   ]
 }
